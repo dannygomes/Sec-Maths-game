@@ -6,12 +6,54 @@
         <title>Sec Maths</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <div id="home">
+            <div id="heading-container">
+                <h1 id="main-heading">Quick Maths</h1>
+            </div>
+            
+            <div id="buttons" class="mt-5">
+                <button id="play-button" class="button mr-4"><span class="button-text">Play</span></button>
+                <button id="highscore-button" class="button mr-4"><span class="button-text">High Scores</span></button>
+                <button id="instructions-button" class="button"><span class="button-text">Instructions</span></button>
+            </div>
+        </div>
+
+        <div id="play" class="container d-flex flex-column align-items-center justify-content-center">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <h1 id="timer">Time left: <span id="seconds"></span></h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h1 id="calculation" >
+                        <span id="firstNumber"></span> 
+                        <span id="operator"></span> 
+                        <span id="secondNumber"></span> 
+                        = 
+                        <span><input id="result" type="text"></span>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h1 id="score-text">Score: <span id="score">0</span></h1>
+                </div>
+            </div>
+        </div>
+
+
         
         <script src="script.js" async defer></script>
     </body>

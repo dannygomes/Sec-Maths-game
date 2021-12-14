@@ -1,0 +1,58 @@
+body {
+    /*#3B653D,#306744,#428957,#4B6C56,#3B653D,#306744,#428957,#4B6C56*/
+    background-image: url(./imgs/background.jpg);
+    background-size: cover;
+    color: #FBF7F5;
+    font-family: 'Pangolin', cursive;
+}
+
+#home {
+    height: 80vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-heading {
+    font-size: 6rem;
+}
+
+.button {
+    font-size: 20px;
+    padding: 2rem 2rem;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-family: inherit;
+}
+
+.button-text {
+    display: inline-block;
+    width: 100px;
+}
+
+#play {
+    height: 80vh;
+}
+
+#timer {
+    font-size: 6rem;
+}
+
+#calculation {
+    text-align: center;
+    font-size: 4rem;
+}
+
+#result {
+    border: 1px solid white;
+    background-color: transparent;
+    width: 120px;
+    color: white;
+    text-align: center;
+}
+
+#score-text {
+    font-size: 4rem;
+}

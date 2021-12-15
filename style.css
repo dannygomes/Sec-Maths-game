@@ -8,7 +8,7 @@ body {
 
 #home {
     height: 80vh;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -19,12 +19,18 @@ body {
 }
 
 .button {
-    font-size: 20px;
-    padding: 2rem 2rem;
-    background-color: transparent;
+    font-size: 1.25rem;
+    height: 5rem;
+    width: 10rem;
+    background-color: rgba(256, 256, 256, .2);
     border: 1px solid white;
-    color: white;
+    color: rgb(255, 255, 255);
     font-family: inherit;
+    transition: background-color 1s;
+}
+
+.button:hover {
+    background-color: black;
 }
 
 .button-text {
@@ -32,8 +38,18 @@ body {
     width: 100px;
 }
 
+#max-value-select {
+    height: 90vh;
+    display: flex;
+}
+
+#max-value-label {
+    font-size: 4rem;
+}
+
 #play {
-    height: 80vh;
+    height: 90vh;
+    display: flex;
 }
 
 #timer {
@@ -45,14 +61,34 @@ body {
     font-size: 4rem;
 }
 
-#result {
+input {
     border: 1px solid white;
     background-color: transparent;
-    width: 120px;
+    font-size: 4rem;
+    height: 5rem;
+    width: 10rem;
     color: white;
     text-align: center;
 }
 
 #score-text {
     font-size: 4rem;
+}
+
+#game-over {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#game-over-header {
+    font-size: 6rem;
+}
+
+/**/
+
+.hidden {
+    display: none!important;
+    transition: display 2s;
 }

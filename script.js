@@ -1,20 +1,49 @@
+var max;
+var timer = null;
+
 $(window).on('load', function () {
-    $('#play-button').on('click', function () {
-        $('#home').slideUp("slow");
+    $(".hidden").hide().removeClass("hidden");
+    playButton();
+
+    
+    $('#start-button').on('click', function () {
+        if($('#max-value').val() < 0){
+            alert("I don't like negative numbers, sorry. Try again!");
+        } else {
+            max = $('#max-value').val();
+
+            $('#max-value-select').slideUp();
+            $('#play').slideDown();
+            play(max);
+        }
+ 
     });
 
-    $('#seconds').text(time);
-    play(max);
-    timeout = null;
+    $('#seconds').text(10);
+
+    var timeout;
     $('#result').on('keyup', function () {
+        if(!timer){
+            //Realized i have to set interval only once and not on every key up
+            timer = setInterval(updateTimer, 1000);
+        }
         clearTimeout(timeout);
         timeout = setTimeout(checkResult, 250);
     });
 });
 
-var timer = setInterval(updateTimer, 1000);
-const time = 10;
-const max = 10;
+function playButton () {
+    $('#play-button').on('click', function () {
+        $('#home').slideUp();
+        $('#max-value-select').slideDown();
+    });
+
+    $('.back-button').on('click', function () {
+        $('#max-value-select').slideUp();
+        $('#home').slideDown();
+    });
+}
+
 
 function play (max) {
     $('#firstNumber').text(generateNumberUpTo(max));
@@ -22,21 +51,17 @@ function play (max) {
     $('#operator').text(setOperator());
 
     $('#result').focus();
-
 }
 
 function checkResult () {
     var result = $('#result').val();
-    var firstNumber = Number($('#firstNumber').text());
-    var secondNumber = Number($('#secondNumber').text());
     var correctAnswer = getAnswer();
     
     if(result == correctAnswer){
-        clearInterval(timer);
         $('#seconds').text(Number($('#seconds').text()) < 10 ? Number($('#seconds').text()) + 1 : 10);
-        timer = setInterval(updateTimer, 1000);
         play(max);
         $('#result').val('');
+        $('#score').text(Number($('#score').text()) + 1);
     } else {
         $('#result').val('');
     }
@@ -79,8 +104,12 @@ function setOperator() {
             break;
         case 3:
             $('#operator').text('/'); 
+            console.log(Number($('#secondNumber').text()) == 0);
             if(Number($('#firstNumber').text()) < Number($('#secondNumber').text())){
                 flipNumbers();
+            } 
+            if(Number($('#secondNumber').text()) == 0){
+                $('#secondNumber').text('1');
             }
             break;
         default:
@@ -101,11 +130,32 @@ function updateTimer () {
         $('#seconds').text(Number( $('#seconds').text()) - 1);
     } else {
         $('#seconds').text('0');
+        clearInterval(timer);
+        timer = null;
+        gameOver();
     }
 }
 
 function generateNumberUpTo(max) {
     var number = Math.floor(Math.random() * max);
     return number;
+}
+
+function gameOver () {
+    $('#play').slideUp();
+    $('#game-over').slideDown();
+    $('#seconds').text('10');
+    $('#score').text('0');
+
+    $('.home-button').on('click', function () {
+        $('#game-over').slideUp();
+        $('#home').slideDown();
+    });
+
+    $('.try-again-button').on('click', function () {
+        $('#game-over').slideUp();
+        $('#play').slideDown();
+        play(max);
+    })
 }
 

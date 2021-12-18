@@ -4,14 +4,7 @@ body {
     background-size: cover;
     color: #FBF7F5;
     font-family: 'Pangolin', cursive;
-}
-
-#home {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    font-size: 1.5rem;
 }
 
 #main-heading {
@@ -75,15 +68,25 @@ input {
     font-size: 4rem;
 }
 
-#game-over {
+.center {
     height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-#game-over-header {
+
+.header {
     font-size: 6rem;
+}
+
+#highscores {
+    height: 90vh;
+    display: flex;
+}
+
+label {
+    font-size: 3rem;
 }
 
 /**/

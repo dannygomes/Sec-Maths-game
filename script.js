@@ -5,7 +5,6 @@ $(window).on('load', function () {
     $(".hidden").hide().removeClass("hidden");
     playButton();
 
-    
     $('#start-button').on('click', function () {
         if($('#max-value').val() < 0){
             alert("I don't like negative numbers, sorry. Try again!");
@@ -17,6 +16,21 @@ $(window).on('load', function () {
             play(max);
         }
  
+    });
+
+    $('#name-input-field').on('focus', function () {
+        $(this).val('');
+    });
+
+    
+    $(document).on('click', '.back-button', function () {
+        $(this.closest('.center')).slideUp();
+        $('#home').slideDown();
+    });
+
+    $('#highscore-button').on('click', function () {
+        $('#home').slideUp();
+        $('#highscores').slideDown();
     });
 
     $('#seconds').text(10);
@@ -36,11 +50,6 @@ function playButton () {
     $('#play-button').on('click', function () {
         $('#home').slideUp();
         $('#max-value-select').slideDown();
-    });
-
-    $('.back-button').on('click', function () {
-        $('#max-value-select').slideUp();
-        $('#home').slideDown();
     });
 }
 
@@ -143,7 +152,14 @@ function generateNumberUpTo(max) {
 
 function gameOver () {
     $('#play').slideUp();
-    $('#game-over').slideDown();
+    var sessionScore = Number($('#score').text());
+    if(sessionScore > getLowestHighScore()){
+        $('#new-highscore').slideDown();
+        setNewHighscore(sessionScore);
+    } else {
+        $('#game-over').slideDown();
+    }
+
     $('#seconds').text('10');
     $('#score').text('0');
 

@@ -17,7 +17,7 @@
     <body>
         <div id="home" class="center">
             <div id="heading-container">
-                <h1 id="main-heading">Quick Maths</h1>
+                <h1 id="main-heading" class="header">Quick Maths</h1>
             </div>
             
             <div id="buttons" class="mt-5">
@@ -28,18 +28,18 @@
         </div>
 
         <div id="max-value-select" class="hidden center">
-            <h1 id="max-value-label" class="mr-3">Select max calculation value:</h1>
-            <div id="selection" class="d-flex align-items-top mt-3">
+            <h1 class="header mr-3">Select max value:</h1>
+            <div id="selection" class="d-flex align-items-top flex-column flex-md-row mt-3">
+                <input id="max-value" class="mr-3 mb-4 mb-md-0" value="10" min="0" type="number">
                 <button id="start-button" class="button mr-3">Start</button>
                 <button class="button back-button mr-3">Back</button>
-                <input id="max-value" value="10" min="0" type="number">
             </div>
         </div>
 
         <div id="play" class="container hidden center">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center">
-                    <h1 id="timer">Time left: <span id="seconds"></span></h1>
+                    <h1 id="timer" class="header">Time left: <span id="seconds"></span></h1>
                 </div>
             </div>
 
@@ -81,11 +81,24 @@
 
         <div id="new-highscore" class="hidden center">
             <h1 id="new-highscore-header" class="header">New Highscore!</h1>
-            <div id="name-input" class="d-flex align-items-bottom">
-                <label for="name-input" class="mr-3">Name:</label>
-                <input id="name-input-field" class="mr-3" type="text" maxlength="3" minlength="1" value="XYZ">
+            <div id="name-input" class="d-flex align-items-bottom flex-column flex-md-row">
+                <label for="name-input" class="mr-0 mr-md-3">Name:</label>
+                <input id="name-input-field" class="mr-3 mb-3 mb-md-0" type="text" maxlength="3" minlength="1" value="XYZ">
                 <button class="button back-button submit-button">Submit</button>
             </div>
+        </div>
+
+        <div id="instructions" class="hidden center">
+            <h1 id="instructions-header" class="header">Instructions</h1>
+            <div id="instructions-text">
+                <p class="">Hello! <br>1. After pressing play you will be asked for a max calculation value.
+                    For example, if you select 10 you will only be given calculations with values below 10. <br>
+                    2. For each correct answer, one second will be added to the timer (10 seconds max). If the timer hits 0, game over!
+                    <br>3. For divisions where the answer would typically have a decimal point the correct answer is the 
+                    value without the remainder.<br>4. You get 1 point times your max value per correct answer.<br>Good luck!
+                </p>
+            </div>
+            <button class="button back-button submit-button">Back</button>
         </div>
         
         <script src="script.js" async defer></script>

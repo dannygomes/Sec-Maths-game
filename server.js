@@ -5,48 +5,34 @@ var lowestHighscore;
 var lowestHighscoreID;
 var allIDs = [];
 $(window).on('load', function () {
-    $.ajax({
-        type: 'GET',
-        url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=213',
-        dataType: 'json',
-        success: function (response, textStatus) {
-          lowestHighscore = response.tasks[0].content.split(';')[2];
-          response.tasks.forEach(function (task) {
-            if(task.content.split(';')[0] == 'secmaths'){
-              currentHighScores.push(task.content.split(';'));
-              allIDs.push(task.id);
-            }
-            if(task.content.split(';')[2] < lowestHighscore) {
-              lowestHighscoreID = task.id;
-              lowestHighscore = task.content.split(';')[2];
-            }
-          });
-          console.log(lowestHighscore, lowestHighscoreID, 'overhere');
-          generateLeaderboard();
-          injectLeaderboard();
-        },
-        error: function (request, textStatus, errorMessage) {
-          console.log(errorMessage);
-        }
-      });
-
+  getHighScores();
 });
 
-/*
-function getLowestHighScore (highScores) {
-    highScores.tasks.forEach(function (task) {
-        //$('#todo-list').append('<p>' + task.content + '</p>');
-        // secmaths;DAN;25
-        var highScore = task.content.split(';');
-        var lowestHighScore;
-        var lowestHighScoreID;
-        if(highScore[2] < lowestHighScore || !lowestHighScore) {
-            lowestHighScoreID = task.id;
-            lowestHighScore = highScore[2];
+function getHighScores() {
+  $.ajax({
+    type: 'GET',
+    url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=213',
+    dataType: 'json',
+    success: function (response, textStatus) {
+      lowestHighscore = response.tasks[0].content.split(';')[2];
+      response.tasks.forEach(function (task) {
+        if(task.content.split(';')[0] == 'secmaths'){
+          currentHighScores.push(task.content.split(';'));
+          allIDs.push(task.id);
+        }
+        if(task.content.split(';')[2] < lowestHighscore) {
+          lowestHighscoreID = task.id;
+          lowestHighscore = task.content.split(';')[2];
         }
       });
+      generateLeaderboard();
+      injectLeaderboard();
+    },
+    error: function (request, textStatus, errorMessage) {
+      console.log(errorMessage);
+    }
+  });
 }
-*/
 
 //need to create an array with the content from each task
 function generateLeaderboard() {
@@ -79,6 +65,9 @@ function getLowestHighScore () {
   return Number(lastLineArray[lastLineArray.length - 1]);
 }
 
+/*
+ In here I need to call function to delete the lowest high score from the server and inject the new one
+*/
 function setNewHighscore(score) {
   $('.submit-button').on('click', function () {
     if($('#name-input-field').val().trim() == "") {
@@ -89,35 +78,14 @@ function setNewHighscore(score) {
       currentHighScores.push(highscore.split(' '));
       generateLeaderboard();
       injectLeaderboard();
+
+      deleteScore(lowestHighscoreID);
+      postScore($('#name-input-field').val(), score);
     }
   });
 }
 
-/* New highscore is read and injected into DOM and last highscore is removed but only in current session
-   need to clear all server highscores maybe? and post new updated leaderboard with new highscore
-   and remove old one
-*/
-function updateLeaderboard () {
-    $.ajax({
-        type: 'POST',
-        url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=213',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify({
-          task: {
-            content: 'Do something fun'
-          }
-        }),
-        success: function (response, textStatus) {
-          console.log(response);
-        },
-        error: function (request, textStatus, errorMessage) {
-          console.log(errorMessage);
-        }
-      });   
-}
-
-var postScore = function (score) {
+var postScore = function (name, score) {
   $.ajax({
     type: 'POST',
     url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks?api_key=213',
@@ -125,7 +93,10 @@ var postScore = function (score) {
     dataType: 'json',
     data: JSON.stringify({
       task: {
-        content: score
+        id: 1,
+        content: 'secmaths;' + name + ';' + score,
+        completed: 'false',
+        due: '2017-10-21T06:01:02.000Z',
       }
     }),
     success: function (response, textStatus) {
@@ -142,14 +113,10 @@ var deleteScore = function (id) {
    type: 'DELETE',
       url: 'https://altcademy-to-do-list-api.herokuapp.com/tasks/' + id + '?api_key=213',
       success: function (response, textStatus) {
-        getAndDisplayAllTasks();
+        console.log('lowest high score deleted');
       },
       error: function (request, textStatus, errorMessage) {
         console.log(errorMessage);
       }
     });
   }
-
- $(document).on('click', '.delete', function () {
-   deleteTask($(this).data('id'));
- });

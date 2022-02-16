@@ -44,6 +44,11 @@ $(window).on('load', function () {
         clearTimeout(timeout);
         timeout = setTimeout(checkResult, 250);
     });
+
+    $('#instructions-button').on('click', function () {
+        $('#home').slideUp();
+        $('#instructions').slideDown();
+    });
 });
 
 function playButton () {
@@ -70,7 +75,7 @@ function checkResult () {
         $('#seconds').text(Number($('#seconds').text()) < 10 ? Number($('#seconds').text()) + 1 : 10);
         play(max);
         $('#result').val('');
-        $('#score').text(Number($('#score').text()) + 1);
+        $('#score').text(Number($('#score').text()) + (1*max));
     } else {
         $('#result').val('');
     }

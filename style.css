@@ -7,15 +7,11 @@ body {
     font-size: 1.5rem;
 }
 
-#main-heading {
-    font-size: 6rem;
-}
-
 .button {
     font-size: 1.25rem;
     height: 5rem;
     width: 10rem;
-    background-color: rgba(256, 256, 256, .2);
+    background-color: rgba(0, 0, 0, .4);
     border: 1px solid white;
     color: rgb(255, 255, 255);
     font-family: inherit;
@@ -36,17 +32,9 @@ body {
     display: flex;
 }
 
-#max-value-label {
-    font-size: 4rem;
-}
-
 #play {
     height: 90vh;
     display: flex;
-}
-
-#timer {
-    font-size: 6rem;
 }
 
 #calculation {
@@ -89,9 +77,68 @@ label {
     font-size: 3rem;
 }
 
+#instructions-text {
+    width: 45%;
+}
+
 /**/
 
 .hidden {
     display: none!important;
     transition: display 2s;
+}
+
+/*Breakpoints*/
+
+@media (max-width: 992px){
+    body {
+        font-size: 1.3rem;
+    }
+
+    input {
+        font-size: 3rem;
+    }
+   
+    .header {
+        font-size: 5rem;
+    }
+   
+    #instructions-text {
+        width: 60%;
+        border: 1px solid #FBF7F5;
+        margin-bottom: 20px;
+        background-color: rgba(0, 0, 0, 0.486);
+    }
+}
+
+@media (max-width: 768px){
+    #instructions-text {
+        width: 70%;
+    }
+}
+
+
+@media (max-width: 576px){
+    body {
+        font-size: 1.2rem;
+    }
+
+    .header {
+        font-size: 3.3rem;
+    }
+
+    #instructions-text {
+        width: 95%;
+        margin: 10px;
+        margin-bottom: 40px;
+    }
+
+    #buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button {
+        margin-bottom: 30px;
+    }
 }
